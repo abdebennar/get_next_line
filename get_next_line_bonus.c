@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abennar <abennar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abennar <abennar@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 20:24:20 by abennar           #+#    #+#             */
-/*   Updated: 2023/12/17 23:31:34 by abennar          ###   ########.fr       */
+/*   Updated: 2024/10/27 14:21:32 by abennar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ char	*get_next_line(int fd)
 	char		*buff;
 	ssize_t		r;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0
-		|| BUFFER_SIZE > 2147483424)
-		return (NULL);
+	if (fd < 0)
+		return (errno = EBADF, NULL);
 	if (read(fd, 0, 0) == -1)
 		return (m_free(line[fd]), line[fd] = NULL, NULL);
 	buff = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
